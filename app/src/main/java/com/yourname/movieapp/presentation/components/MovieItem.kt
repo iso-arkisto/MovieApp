@@ -47,9 +47,11 @@ fun MovieItem(
     item: Movie,
     navHostController: NavHostController
 ) {
+    val posterPath = item.poster_path
+
     val imageState = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
-            .data(MovieApi.IMG_BASE_URL+item.backdrop_path)
+            .data(MovieApi.IMG_BASE_URL+posterPath.removePrefix("/"))
             .size(Size.ORIGINAL)
             .build()
     ).state
