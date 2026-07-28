@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.yourname.movieapp.domain.repository.MovieListRepository
 import com.yourname.movieapp.utils.Category
 import com.yourname.movieapp.utils.Resource
+import com.yourname.movieapp.utils.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,9 +28,9 @@ class MovieListViewModel @Inject constructor(
 
     fun onEvent(event: MovieListUiEvent) {
         when(event) {
-            is MovieListUiEvent.Navigate -> {
+            is MovieListUiEvent.ChangeCategory -> {
                 _movieListState.update { listState ->
-                    listState.copy(isCurrentPopularScreen = !movieListState.value.isCurrentPopularScreen)
+                    listState.copy(isCurrentPopularScreen = event.category == Category.POPULAR)
                 }
             }
             is MovieListUiEvent.Paginate -> {

@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import com.yourname.movieapp.presentation.MovieListUiEvent
+import com.yourname.movieapp.utils.Category
 import com.yourname.movieapp.utils.Screen
 
 @Composable
@@ -25,8 +26,8 @@ fun BottomNavBar(
     onEvent: (MovieListUiEvent) -> Unit
 ) {
     val items = listOf<BottomItem>(
-        BottomItem("Popular", Icons.Rounded.Movie),
-        BottomItem("Upcoming", Icons.Rounded.Upcoming)
+        BottomItem("Popular", Icons.Rounded.Movie, Category.POPULAR),
+        BottomItem("Upcoming", Icons.Rounded.Upcoming, Category.UPCOMING)
     )
 
     val selectedItem = rememberSaveable(items) { mutableIntStateOf(0) }
@@ -41,7 +42,7 @@ fun BottomNavBar(
                     selected = selectedItem.intValue == index,
                     onClick = {
                         selectedItem.intValue = index
-                        onEvent(MovieListUiEvent.Navigate)
+                        onEvent(MovieListUiEvent.ChangeCategory(item.category))
                         when(selectedItem.intValue) {
                             0 -> {
                                 navController.popBackStack()
@@ -74,5 +75,6 @@ fun BottomNavBar(
 
 data class BottomItem(
     val title: String,
-    val icon: ImageVector
+    val icon: ImageVector,
+    val category: String
 )
