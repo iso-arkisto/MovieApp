@@ -1,5 +1,6 @@
 package com.yourname.movieapp.data.repository
 
+import android.util.Log
 import coil.network.HttpException
 import com.yourname.movieapp.data.local.MovieDatabase
 import com.yourname.movieapp.data.mappers.toMovie
@@ -48,6 +49,11 @@ class MovieListRepositoryImpl @Inject constructor(
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(Resource.Error("App error"))
+                return@flow
+            }
+
+            if(movieListFromApi.result == null) {
+                emit(Resource.Error("Data from server is null"))
                 return@flow
             }
 
