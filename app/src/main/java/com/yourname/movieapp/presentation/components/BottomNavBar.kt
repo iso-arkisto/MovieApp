@@ -45,11 +45,11 @@ fun BottomNavBar(
                         when(selectedItem.intValue) {
                             0 -> {
                                 navController.popBackStack()
-                                navController.navigate(Screen.PopularMovies)
+                                navController.navigate(Screen.PopularMovies.route)
                             }
                             1 -> {
                                 navController.popBackStack()
-                                navController.navigate(Screen.UpcomingMovies)
+                                navController.navigate(Screen.UpcomingMovies.route)
                             }
                         }
                     },
