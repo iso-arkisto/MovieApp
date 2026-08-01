@@ -18,35 +18,40 @@ class DetailsViewModel @Inject constructor(
     private val repository: MovieListRepository,
     private val savedStateHandle: SavedStateHandle
 ): ViewModel() {
+    private val movieId: Int? = savedStateHandle["movieId"]
     private val _detailsState = MutableStateFlow(DetailsState())
     val detailsState = _detailsState.asStateFlow()
 
-    fun getMovie(
-        id: Int
-    ) {
-        viewModelScope.launch {
-            _detailsState.update { listState ->
-                listState.copy(isLoading = true)
-            }
+    init {
+        getMovie()
+    }
 
-            repository.getMovie(id).collectLatest { result ->
-                when(result) {
-                    is Resource.Error -> {
-                        _detailsState.update { listState ->
-                            listState.copy(isLoading = false)
+    fun getMovie() {
+        viewModelScope.launch {
+            movieId?.let { id ->
+                _detailsState.update { listState ->
+                    listState.copy(isLoading = true)
+                }
+
+                repository.getMovie(id).collectLatest { result ->
+                    when(result) {
+                        is Resource.Error -> {
+                            _detailsState.update { listState ->
+                                listState.copy(isLoading = false)
+                            }
                         }
-                    }
-                    is Resource.Loading -> {
-                        _detailsState.update { listState ->
-                            listState.copy(isLoading = result.loading)
+                        is Resource.Loading -> {
+                            _detailsState.update { listState ->
+                                listState.copy(isLoading = result.loading)
+                            }
                         }
-                    }
-                    is Resource.Success -> {
-                        _detailsState.update { listState ->
-                            listState.copy(
-                                isLoading = false,
-                                movie = result.data
-                            )
+                        is Resource.Success -> {
+                            _detailsState.update { listState ->
+                                listState.copy(
+                                    isLoading = false,
+                                    movie = result.data
+                                )
+                            }
                         }
                     }
                 }
