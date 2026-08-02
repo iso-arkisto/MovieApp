@@ -110,7 +110,7 @@ fun MovieItem(
 
             Text(
                 text = item.title,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 15.sp,
                 maxLines = 1,
                 modifier = Modifier.padding(start = 6.dp, end = 8.dp)
@@ -128,7 +128,7 @@ fun MovieItem(
                 Text(
                     text = item.vote_average.toString().take(3),
                     modifier = Modifier.padding(start = 4.dp),
-                    color = Color.LightGray,
+                    color = Color.Gray,
                     fontSize = 14.sp,
                     maxLines = 1
                 )
