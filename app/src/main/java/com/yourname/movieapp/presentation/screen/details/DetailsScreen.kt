@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ImageNotSupported
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -75,6 +76,7 @@ fun DetailsScreen() {
             .verticalScroll(
                 rememberScrollState()
             )
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Box(
             modifier = Modifier
@@ -171,60 +173,93 @@ fun DetailsScreen() {
                     Text(
                         text = movie.title,
                         modifier = Modifier.padding(start = 16.dp),
-                        fontSize = 19.sp,
-                        fontWeight = FontWeight.SemiBold
+                        fontSize = 27.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Row(
                         modifier = Modifier
                             .padding(16.dp)
                     ) {
                         RatingBar(
-                            starsModifier = Modifier.size(18.dp),
+                            starsModifier = Modifier.size(23.dp),
                             rating = movie.vote_average/2
                         )
 
                         Text(
                             text = movie.vote_average.toString().take(3),
                             modifier = Modifier.padding(start = 4.dp),
-                            fontSize = 14.sp,
-                            color = Color.LightGray
+                            fontSize = 16.sp,
+                            color = Color.Gray
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                    Text(
-                        text = movie.original_language,
-                        modifier = Modifier.padding(16.dp)
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(start = 16.dp)
+                    ) {
+                        Text(
+                            text = "Original language",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = movie.original_language,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(12.dp))
 
-                    Text(
-                        text = movie.release_date,
-                        modifier = Modifier.padding(16.dp)
-                    )
+                        Text(
+                            text = "Release date",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = movie.release_date,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(12.dp))
 
-                    Text(
-                        text = movie.vote_count.toString(),
-                        modifier = Modifier.padding(16.dp)
-                    )
+                        Text(
+                            text = "Vote count",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = movie.vote_count.toString(),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        HorizontalDivider(
+            modifier = Modifier.padding(12.dp),
+            thickness = 1.dp,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         Text(
             text = "Overview",
             modifier = Modifier.padding(start = 16.dp),
             fontSize = 19.sp,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -233,8 +268,8 @@ fun DetailsScreen() {
             Text(
                 text = movie.overview,
                 modifier = Modifier.padding(start = 16.dp),
-                fontSize = 19.sp,
-                fontWeight = FontWeight.SemiBold
+                fontSize = 15.sp,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
