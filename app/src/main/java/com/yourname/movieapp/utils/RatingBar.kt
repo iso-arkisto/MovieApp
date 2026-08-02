@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.yourname.movieapp.ui.theme.DarkYellow
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -32,7 +33,7 @@ fun RatingBar(
     starsModifier: Modifier = Modifier,
     rating: Double = 0.0,
     stars: Int = 5,
-    starsColor: Color = Color.Yellow
+    starsColor: Color = DarkYellow
 ) {
     val filledStars = floor(rating).toInt()
     val unfilledStars = (stars - ceil(rating).toInt())
