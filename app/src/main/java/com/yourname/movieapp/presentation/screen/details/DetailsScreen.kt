@@ -267,7 +267,7 @@ fun DetailsScreen() {
         state.movie?.let { movie ->
             Text(
                 text = movie.overview,
-                modifier = Modifier.padding(start = 16.dp),
+                modifier = Modifier.padding(16.dp, top = 0.dp),
                 fontSize = 15.sp,
                 color = MaterialTheme.colorScheme.onSurface
             )
