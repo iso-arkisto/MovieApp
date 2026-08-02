@@ -35,11 +35,14 @@ fun BottomNavBar(
     NavigationBar() {
         Row(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.inverseSurface)
+                .background(MaterialTheme.colorScheme.surface)
         ) {
             items.forEachIndexed { index, item ->
+
+                val isSelected = selectedItem.intValue == index
+
                 NavigationBarItem(
-                    selected = selectedItem.intValue == index,
+                    selected = isSelected,
                     onClick = {
                         selectedItem.intValue = index
                         onEvent(MovieListUiEvent.ChangeCategory(item.category))
@@ -58,13 +61,13 @@ fun BottomNavBar(
                         Icon(
                             imageVector = item.icon,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onBackground
+                            tint = if(isSelected) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onBackground
                         )
                     },
                     label = {
                         Text(
                             text = item.title,
-                            color = MaterialTheme.colorScheme.onBackground
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 )

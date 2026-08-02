@@ -52,12 +52,12 @@ class MovieListRepositoryImpl @Inject constructor(
                 return@flow
             }
 
-            if(movieListFromApi.result == null) {
+            if(movieListFromApi.results == null) {
                 emit(Resource.Error("Data from server is null"))
                 return@flow
             }
 
-            val movieEntities = movieListFromApi.result.let {
+            val movieEntities = movieListFromApi.results.let {
                 it.map { moviedto ->
                     moviedto.toMovieEntity(category)
                 }
